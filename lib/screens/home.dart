@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meditation_app_ui/screens/details_page.dart';
 import 'package:meditation_app_ui/widgets/bottom_nav_bar.dart';
 import 'package:meditation_app_ui/widgets/card.dart';
+import 'package:meditation_app_ui/widgets/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -11,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.45,
+            height: MediaQuery.of(context).size.height * 0.5,
             decoration: BoxDecoration(
                 color: Color(0xFFF5CEB9),
                 image: DecorationImage(
@@ -43,19 +45,7 @@ class HomeScreen extends StatelessWidget {
                         .headline4
                         .copyWith(fontWeight: FontWeight.w900),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 30),
-                    padding: EdgeInsets.symmetric(horizontal: 38, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(29.5)),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: 'Search',
-                          icon: SvgPicture.asset('assets/icons/search.svg'),
-                          border: InputBorder.none),
-                    ),
-                  ),
+                  SearchBar(),
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
@@ -76,7 +66,11 @@ class HomeScreen extends StatelessWidget {
                         CategoryCard(
                           title: "Meditation",
                           svgSource: "assets/icons/Meditation.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return DetailsScreen();
+                            }));
+                          },
                         ),
                         CategoryCard(
                           title: "Yoga",
